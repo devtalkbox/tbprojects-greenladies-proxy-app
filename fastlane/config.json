@@ -1,0 +1,39 @@
+{
+  "firebase": {
+    "group": "fastlane",
+    "token": "ENVIRONMENT_TOKEN_KEY"
+  },
+  "android": [
+    {
+      "firebase": "1:12345:android:123456",
+      "ota": "https://appdistribution.firebase.dev/i/asd"
+    }
+  ],
+  "ios": [
+    {
+      "firebase": "1:12345:android:123456",
+      "ota": "https://appdistribution.firebase.dev/i/asd",
+      "method": "ad-hoc"
+    }
+  ],
+  "match": {
+    "git_url": "git@gitlab.com",
+    "username": "user@example.com",
+    "team_id": "123456",
+    "certificates": [
+      {
+        "git_url": "git@gitlab.com",
+        "type": "development",
+        "git_branch": "enterprise",
+        "app_identifier": "app.id",
+        "username": "user@example.com",
+        "team_id": "123456"
+      }
+    ]
+  },
+  "deploy": {
+    "package_name": "com.exmaple",
+    "issuer_id": "12-3-4-5-6",
+    "key_id": "ABC123EFG"
+  }
+}

@@ -1,0 +1,49 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+def buildApp(isAndroid)
+    if isAndroid
+      sh("flutter build apk")
+    else
+      sh("flutter build ios --no-codesign")
+      gym(
+        scheme: flavor,
+        workspace: "./ios/Runner.xcworkspace",
+        output_directory: "./build/ipa/",
+        output_name: ".ipa",
+        xcargs: "-allowProvisioningUpdates"
+    )
+    end
+end
+
+lane :android do
+    isAndroid = true
+    buildApp(isAndroid)
+    #upload(build_json[:firebase], build, isAndroid)
+
+end
+
+lane :ios do
+    isAndroid = false
+    match_ios_certificates
+
+    buildApp(isAndroid)
+    #upload(build_json[:firebase], build, isAndroid)
+end
+
+lane :build do
+    android
+    ios
+end
