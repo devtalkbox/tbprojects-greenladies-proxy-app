@@ -178,7 +178,7 @@ class _ConnectionStatusScreenState extends State<ConnectionStatusScreen> {
     });
   }
 
-  Future<void> showFailureDialog(BuildContext context, String message) {
+  Future<void> showFailureDialog(BuildContext context, String message, {Map<String, dynamic>? failurePayload}) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -187,7 +187,7 @@ class _ConnectionStatusScreenState extends State<ConnectionStatusScreen> {
     );
     return Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pop();
-      DeepLink().routeToConsoleFailed(widget.host);
+      failurePayload == null ? DeepLink().routeToConsoleFailed(widget.host) : DeepLink().routeToConsoleFailedWithError(widget.host, failurePayload, widget.payload);
     });
   }
 
