@@ -39,11 +39,11 @@ class DeepLink {
   void routeToConsole(String host, Map<String, dynamic> payload, String inputPayload) {
     final uriParam = util.encodeJsonToUriParam(payload);
     final md5 = util.calculateMD5Hash(inputPayload);
-    util.launchURL("https://$host/pos/cart/eft/$uriParam?md5=$md5");
+    util.launchURL("$host/pos/cart/eft/$uriParam?md5=$md5");
   }
 
   void routeToConsoleFailed(String host) {
-    util.launchURL("https://$host/pos/cart/eft/");
+    util.launchURL("$host/pos/cart/");
   }
 
   void dispose() {
